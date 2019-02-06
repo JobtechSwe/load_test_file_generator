@@ -30,11 +30,22 @@ def generate_municipalities_file(muni):
     return payload
 
 
+def generate_municipalities_key_value(muni):
+    payload = {"key": ["municipality"],
+               "values": []
+               }
+    m_list = []
+    for m in muni:
+        m_list.append([m['legacyAmsTaxonomyId']])
+    payload['values'] = m_list
+    return payload
+
+
 def to_file(j, filename):
     with open(filename, "w") as fp:
         json.dump(j, fp)
 
 
 if __name__ == "__main__":
-    p = generate_municipalities_file(import_municipalities())
-    to_file(p, "test.json")
+    p = generate_municipalities_key_value(import_municipalities())
+    to_file(p, "test_key_value.json")
