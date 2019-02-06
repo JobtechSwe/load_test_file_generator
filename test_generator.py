@@ -36,10 +36,8 @@ def import_occupation_groups():
 def generate_offset(limit):
     offset = []
     for x in range(10):
-        offset.append(str(x*limit))
+        offset.append([str(x*limit)])
     return offset
-    
-    
 
 
 def generate_variable_dict(**kwargs):
