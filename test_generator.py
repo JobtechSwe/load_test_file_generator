@@ -64,5 +64,9 @@ if __name__ == "__main__":
     j_group = import_occupation_groups()
     offset_10 = generate_offset(10)
     offset_100 = generate_offset(100)
+    to_file(generate_variable_dict(region=lan), "test_variable_region.json")
+    to_file(generate_variable_dict(municipality=muni), "test_variable_municipality.json")
+    to_file(generate_variable_dict(occupation_group=j_group), "test_variable_occ_group.json")
+    
     to_file(generate_variable_dict(region=lan, occupation_group=j_group, offset=offset_100), "test_bulk_variable_region_occ_group.json")
-    to_file(generate_variable_dict(region=muni, occupation_group=j_group, offset=offset_10), "test_variable_municipality_occ_group.json")
+    to_file(generate_variable_dict(municipality=muni, occupation_group=j_group, offset=offset_10), "test_variable_municipality_occ_group.json")
