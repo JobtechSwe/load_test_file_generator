@@ -53,6 +53,26 @@ def generate_variable_dict(**kwargs):
     return payload
 
 
+def generate_key_value_dict(size, **kwargs):
+    '''
+    Generates a dictionary in the loader.io key/value format
+    '''
+    payload = {}
+    param_keys = []
+    param_values = []
+    for key, _ in kwargs.items():
+        param_keys.append(key)
+    for i in range(size):
+        rand_list = []
+        for key, valuelist in kwargs.items():
+            v = random.randint(0, len(valuelist)-1)
+            rand_list.append(valuelist[v][0])
+        param_values.append(rand_list)
+    payload['keys'] = param_keys
+    payload['values'] = param_values
+    return payload
+
+
 def to_file(j, filename):
     with open(filename, "w") as fp:
         json.dump(j, fp)
@@ -67,6 +87,7 @@ if __name__ == "__main__":
     to_file(generate_variable_dict(region=lan), "test_variable_region.json")
     to_file(generate_variable_dict(municipality=muni), "test_variable_municipality.json")
     to_file(generate_variable_dict(occupation_group=j_group), "test_variable_occ_group.json")
-    
     to_file(generate_variable_dict(region=lan, occupation_group=j_group, offset=offset_100), "test_bulk_variable_region_occ_group.json")
     to_file(generate_variable_dict(municipality=muni, occupation_group=j_group, offset=offset_10), "test_variable_municipality_occ_group.json")
+    to_file(generate_key_value_dict(1000, municipality=muni, occupation_group=j_group), "test_key_value_municipality_occ_group_1000.json")
+    to_file(generate_key_value_dict(1000, region=lan, occupation_group=j_group), "test_key_value_region_occ_group_1000.json")
