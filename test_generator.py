@@ -9,7 +9,7 @@ def import_counties():
     data = r.json()
     lan = []
     for l in data['result']:
-        lan.append([l['legacyAmsTaxonomyId']])
+        lan.append([l['id']])
     return lan
 
 
@@ -19,7 +19,7 @@ def import_municipalities():
     data = r.json()
     muni = []
     for m in data['result']:
-        muni.append([m['legacyAmsTaxonomyId']])
+        muni.append([m['id']])
     return muni
 
 
@@ -29,7 +29,7 @@ def import_occupation_groups():
     data = r.json()
     jg = []
     for j in data['result']:
-        jg.append([j['legacyAmsTaxonomyId']])
+        jg.append([j['id']])
     return jg
 
 
@@ -91,3 +91,4 @@ if __name__ == "__main__":
     to_file(generate_variable_dict(municipality=muni, group=j_group, offset=offset_10), "test_variable_municipality_occ_group.json")
     to_file(generate_key_value_dict(1000, municipality=muni, group=j_group), "test_key_value_municipality_occ_group_1000.json")
     to_file(generate_key_value_dict(1000, region=lan, group=j_group), "test_key_value_region_occ_group_1000.json")
+    to_file(generate_key_value_dict(1000, municipality=muni), "test_key_value_municipality_1000.json")
